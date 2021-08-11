@@ -1,0 +1,114 @@
+App -> infoLoaded, state: currentUser, token
+
+Homepage -> currentUser (update fn from App)
+Navigation -> currentUser (update fn from App)(useEffect)
+
+Routes -> login (fn?), register
+PrivateRoute ->  currentUser (update fn from App)
+
+CompanyList -> useEffect, getCompaniesOnMount
+CompanyCard -> name, desc, logo
+CompanyDetail -> API call get by handle?
+
+JobList -> useEffect, getAllJobsOnMount (API call)
+JobCardList -> jobs: array of jobs {title, id, equity, salary}, getAllJobsOnMount (effect)
+JobCard -> button, updateAppliedStatus, useEffect
+
+SearchForm -> API calls (to job or company)
+ProfileForm -> (update fn from App)
+LoginForm -> useEffect with item, API call to (users/username) (get) (updates Navigation)
+SignupForm -> (updates Navigation) (goes to /companies)
+
+function useLocalStorage -> item: token
+
+App -> { Navigation, Routes }
+
+Routes -> { Homepage, LoginForm, SignupForm, PrivateRoute }
+
+PrivateRoute -> { ProfileForm, JobList, CompanyList }
+
+CompanyList -> { SearchForm, CompanyCard }
+
+CompanyCard -> { Company Detail }
+
+CompanyDetail -> { JobCardList -> JobCard }
+
+JobList -> { SearchForm, JobCardList -> JobCard }
+
+
+App: controller component that holds/renders state & input to pass to different components
+    props: 
+    state: currentUser, infoLoaded, token?
+    signup function
+    login function to pass to child components
+    logout
+    update currUser function 
+    update ProfileFunction
+
+    Navigation: navbar at the top of the page
+        props: currentUser, logout, updateProfileFunction
+        state: none
+        useEffect to update navbar on currentUser change << Don't need: naturally re-render nav because it's a child of App 
+
+    Routes: defines routes for application
+        props: login function, signup function, currentUser, update currentUser func;
+        state: none
+
+        Homepage: if logged in, shows "welcome back", else shows login/signup
+            props: currentUser 
+            state: none
+
+        LoginForm: shows form for username/password login
+            props: login function, update currUser function
+            state: formData, formErrors
+
+        SignupForm: shows form for user sign up
+            props: signup function
+            state: formData, formErrors
+
+        PrivateRoutes: defines private routes for application
+            props: current user, updateProfile function
+            state: none
+
+            ProfileForm: form that shows username & allows user to change info
+                props: currentUser, updateProfile function
+                state: formData, formErrors
+
+            JobList: list of jobs [{job objects}, ... ]
+                props: 
+                state: jobs, setJobs (maybe)?
+                useEffect: getAllJobsOnMount function (api call)
+
+                JobCardList: {jobs: array of job objects}
+                    props: jobs
+                    state: none
+
+                    JobCard: simple component that displays job title, company, salary, equity, 
+                            and apply button (with a click handler that makes post req to update 
+                            current user data w/ applied for jobs)
+                        props: job {id: .., company:.., }, update currUser function 
+                        state: applied, setApplied
+                        useEffect updateAppliedStatus
+
+                SearchForm: form for user to search jobs
+                    props: searchFor (api helper function)
+                    state: formData, setFormData
+
+            CompanyList: list of companies
+                props: 
+                state: companies, setCompanies
+                useEffect: getCompaniesOnMount function (api call)
+
+                SearchForm: form for user to search companies
+                    props: searchFor (api helper function)
+                    state:  formData, setFormData
+
+                CompanyCard: simple component with name, desc, logo
+                    props: company {id: ..., name:..., }
+                    state: none
+
+            CompanyDetail: page with name, desc, jobs for single company 
+                props: company
+                state: none
+
+                JobCardList --> JobCards

@@ -1,0 +1,12 @@
+.JobCard {
+    margin: 2%;
+    width: 60%;
+    text-align: left;
+}
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+.JobCard{
+    width: auto;
+    }
+}

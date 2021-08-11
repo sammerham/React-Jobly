@@ -1,0 +1,13 @@
+ 
+  .Navigation a.active {
+    font-weight: bold;
+  }
+
+  .Navigation {
+    background-color: rgb(57, 57, 57);
+  }
+
+  .Navigation a {
+    text-decoration: none;
+    color: rgb(247, 241, 241);
+  }
