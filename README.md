@@ -1,7 +1,7 @@
-# React-Jobly Full stack App
+## React-Jobly Full stack App
 
-# Front End:
-# Getting Started with Create React App
+## Front End:
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -75,8 +75,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 
-# This is the Express backend for Jobly
-# Jobly Backend
+## This is the Express backend for Jobly
+## Jobly Backend
 
 To run this:
 
